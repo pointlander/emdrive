@@ -1,39 +1,52 @@
-union() {
-    difference() {
-        cylinder(h=1, r=25);
-        translate([30, 0, 0])
-            cube(size = [50, 50, 4], center = true);
-    }
-
-    width = sqrt(pow(25, 2)-pow(5,2));
-    width2 = sqrt(pow(12.5, 2)-pow(4.5,2));
-
-    CubePoints = [
-    [  0,  -width,  0 ],  //0
-    [ 25,  -width2,  0 ],  //1
-    [ 25,  width2,  0 ],  //2
-    [  0,  width,  0 ],  //3
-    [  0,  -width,  1 ],  //4
-    [ 25,  -width2,  1 ],  //5
-    [ 25,  width2,  1 ],  //6
-    [  0,  width,  1 ]]; //7
-  
-    CubeFaces = [
-    [0,1,2,3],  // bottom
-    [4,5,1,0],  // front
-    [7,6,5,4],  // top
-    [5,6,2,1],  // right
-    [6,7,3,2],  // back
-    [7,4,0,3]]; // left
-
-    translate([5, 0, 0])  
-        polyhedron( CubePoints, CubeFaces );
-
-    translate([5+25-4.5, 0, 0]) {
+module form() {
+    length = 30;
+    height = 1;
+    radiusL = 25;
+    offsetL = 8;
+    widthL = sqrt(pow(radiusL,2)-pow(offsetL,2));
+    radiusS = radiusL/2;
+    offsetS = 4.5;
+    widthS = sqrt(pow(radiusS, 2)-pow(offsetS,2));
+    union() {
         difference() {
-            cylinder(h=1, r=12.5);
-            translate([-8, 0, 1])
-                cube(size = [25, 25, 4], center = true);
+            cylinder($fn=256, h=height, r=radiusL);
+            translate([radiusL+offsetL, 0, 0])
+                cube(size = [2*radiusL, 2*radiusL, 4], center = true);
+        }
+
+        points = [
+        [      0,  -widthL,       0 ],  //0
+        [ length,  -widthS,       0 ],  //1
+        [ length,   widthS,       0 ],  //2
+        [      0,   widthL,       0 ],  //3
+        [      0,  -widthL,  height ],  //4
+        [ length,  -widthS,  height ],  //5
+        [ length,   widthS,  height ],  //6
+        [      0,   widthL,  height ]]; //7
+  
+        faces = [
+        [0,1,2,3],  // bottom
+        [4,5,1,0],  // front
+        [7,6,5,4],  // top
+        [5,6,2,1],  // right
+        [6,7,3,2],  // back
+        [7,4,0,3]]; // left
+
+        translate([offsetL, 0, 0])  
+            polyhedron(points, faces);
+
+        translate([length+offsetL-offsetS, 0, 0]) {
+            difference() {
+                cylinder($fn=64, h=height, r=radiusS);
+                translate([-(radiusS-offsetS), 0, 1])
+                    cube(size = [2*radiusS, 2*radiusS, 4], center=true);
+            }
         }
     }
+}
+
+union() {
+    form();
+    translate([0, 0, 1]) scale(v = [.9, .9, 2]) form();
+    translate([0, 0, 3]) form();
 }
