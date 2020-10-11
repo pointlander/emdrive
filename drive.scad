@@ -1,17 +1,18 @@
+length = 30;
+height = 1;
+radiusL = 25;
+offsetL = 8;
+widthL = sqrt(pow(radiusL,2)-pow(offsetL,2));
+radiusS = radiusL/2;
+offsetS = 4.5;
+widthS = sqrt(pow(radiusS, 2)-pow(offsetS,2));
+    
 module form() {
-    length = 30;
-    height = 1;
-    radiusL = 25;
-    offsetL = 8;
-    widthL = sqrt(pow(radiusL,2)-pow(offsetL,2));
-    radiusS = radiusL/2;
-    offsetS = 4.5;
-    widthS = sqrt(pow(radiusS, 2)-pow(offsetS,2));
     union() {
         difference() {
             cylinder($fn=256, h=height, r=radiusL);
             translate([radiusL+offsetL, 0, 0])
-                cube(size = [2*radiusL, 2*radiusL, 4], center = true);
+                cube(size = [2*radiusL, 2*radiusL, 4], center=true);
         }
 
         points = [
@@ -37,7 +38,7 @@ module form() {
 
         translate([length+offsetL-offsetS, 0, 0]) {
             difference() {
-                cylinder($fn=64, h=height, r=radiusS);
+                cylinder($fn=128, h=height, r=radiusS);
                 translate([-(radiusS-offsetS), 0, 1])
                     cube(size = [2*radiusS, 2*radiusS, 4], center=true);
             }
@@ -45,8 +46,15 @@ module form() {
     }
 }
 
-union() {
-    form();
-    translate([0, 0, 1]) scale(v = [.9, .9, 2]) form();
-    translate([0, 0, 3]) form();
+difference() {
+    union() {
+        form();
+        translate([0, 0, 1]) scale(v = [.9, .9, 2]) form();
+        translate([0, 0, 3]) form();
+    }
+    translate([(offsetL+length+radiusS-offsetS)/2, 0, 0])
+        cube(size = [1, 1, 16], center=true);
+    cylinder($fn=128, h=16, r=15, center=true);
+    translate([offsetL+length-offsetS, 0, 0])
+        cylinder($fn=128, h=16, r=5, center=true);
 }
