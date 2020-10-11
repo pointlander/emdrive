@@ -6,7 +6,9 @@ widthL = sqrt(pow(radiusL,2)-pow(offsetL,2));
 radiusS = radiusL/2;
 offsetS = 4.5;
 widthS = sqrt(pow(radiusS, 2)-pow(offsetS,2));
-size = radiusL+offsetL+length+radiusS-offsetS;
+standL = 8;
+standT = 1;
+size = radiusL+offsetL+length+radiusS-offsetS+standL+2*standT;
 scale = size/12;
 
 module form() {
@@ -48,15 +50,31 @@ module form() {
     }
 }
 
-difference() {
-    union() {
-        form();
-        translate([0, 0, 1]) scale(v = [.85, .85, 2]) form();
-        translate([0, 0, 3]) form();
-    }
-    translate([(offsetL+length+radiusS-offsetS)/2-radiusL/2, 0, 0])
-        cube(size = [scale, scale, 16], center=true);
-    cylinder($fn=128, h=16, r=5, center=true);
-    translate([offsetL+length-offsetS, 0, 0])
+union() {
+    difference() {
+        union() {
+            form();
+            translate([0, 0, 1]) scale(v = [.85, .85, 2]) form();
+            translate([0, 0, 3]) form();
+        }
+        translate([(offsetL+length+radiusS-offsetS)/2-radiusL/2, 0, 0])
+            cube(size = [scale, scale, 16], center=true);
         cylinder($fn=128, h=16, r=5, center=true);
+        translate([offsetL+length-offsetS, 0, 0])
+            cylinder($fn=128, h=16, r=5, center=true);
+    }
+
+    translate([offsetL+length+radiusS-offsetS, 0, height/2])
+        cube(size = [standL, standL, height], center=true);
+    translate([offsetL+length+radiusS-offsetS, 0, 3+height/2])
+        cube(size = [standL, standL, height], center=true);
+    translate([offsetL+length+radiusS-offsetS+standL/2+standT/2, 0, 2])
+        cube(size = [1, 2*standL, 2*standL], center=true);
+    
+    translate([-radiusL, 0, height/2])
+        cube(size = [standL, standL, height], center=true);
+    translate([-radiusL, 0, 3+height/2])
+        cube(size = [standL, standL, height], center=true);
+    translate([-(radiusL+standL/2+standT/2), 0, 2])
+        cube(size = [standT, 2*8, 2*8], center=true);
 }
