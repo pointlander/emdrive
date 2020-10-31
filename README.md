@@ -27,4 +27,7 @@ https://www.thorlabs.com/thorproduct.cfm?partnumber=FTFC1
 ### ADAFC1 - FC/PC to FC/PC Mating Sleeve, Wide Key (2.2 mm), D-Hole: 3 * $10.61
 https://www.thorlabs.com/thorproduct.cfm?partnumber=ADAFC1
 
-### total: $6862.39
+### LG16 - Laser Safety Glasses, Gray Lenses, 41% Visible Light Transmission, Universal Style: 2 * $184.60
+https://www.thorlabs.com/thorproduct.cfm?partnumber=LG16
+
+### total: $7231.59
