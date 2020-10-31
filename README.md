@@ -1,3 +1,13 @@
+# emdrive
+
+## Reference
+* [EmDrive](https://en.wikipedia.org/wiki/EmDrive)
+* [DARPA Laser Version of EMDrive Has a Test Result Better Than Commercial Ion Drive](https://www.nextbigfuture.com/2020/09/darpa-laser-version-of-emdrive-has-a-test-result-better-than-commercial-ion-drive.html)
+* [The EmDrive Just Won’t Die](https://www.popularmechanics.com/space/rockets/a33917439/emdrive-wont-die/)
+
+## Coil Form
+![coil form](coil_form.jpg?raw=true)
+
 ## Components
 
 ### S4FC1550 - Fabry-Perot Benchtop Laser Source, 1550 nm, 50 mW, FC/PC: 1 * $3,513.64
