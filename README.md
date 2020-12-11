@@ -38,4 +38,4 @@ https://www.thorlabs.com/thorproduct.cfm?partnumber=ADAFC1
 ### LG16 - Laser Safety Glasses, Gray Lenses, 41% Visible Light Transmission, Universal Style: 2 * $184.60
 https://www.thorlabs.com/thorproduct.cfm?partnumber=LG16
 
-### total: $7047.73
+### total: $7047.73 - found cheaper source, using fiber networking cable
